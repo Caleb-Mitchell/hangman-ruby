@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HANGMAN</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <!-- comment this out if site does not use javascript -->
+    <!-- <script src='/javascripts/jquery-2.2.4.js'></script> -->
+    <!-- <script src='/javascripts/application.js'></script> -->
+  </head>
+  <body>
+    <main>
+      <!-- here i put an image of a certain size that is the game -->
+
+      <!-- starting with a collection of images that represent each sequence -->
+      <!-- display the correct image based on how the player is doing -->
+
+      <!-- each view can host an image, so i can send to a different view based on the image I want -->
+
+      <!-- in this version, game is lost with all four limbs, no face -->
+      <%= yield %>
+
+
+      <!-- down here is the form for the gameplay, can store current game state in session -->
+      <!-- this should be visible in every view, so it is in the layout -->
+    </main>
+  </body>
+</html>

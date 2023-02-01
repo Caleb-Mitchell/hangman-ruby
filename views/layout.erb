@@ -8,8 +8,12 @@
     <!-- comment this out if site does not use javascript -->
     <!-- <script src='/javascripts/jquery-2.2.4.js'></script> -->
     <!-- <script src='/javascripts/application.js'></script> -->
+    <link href="/images/favicon.ico" rel="icon">
   </head>
   <body>
+    <header>
+      <h1>H A N G M A N</h1>
+    </header>
     <main>
       <!-- here i put an image of a certain size that is the game -->
 
@@ -19,7 +23,7 @@
       <!-- each view can host an image, so i can send to a different view based on the image I want -->
 
       <!-- in this version, game is lost with all four limbs, no face -->
-      <%= yield %>
+      <%== yield %>
 
 
       <!-- down here is the form for the gameplay, can store current game state in session -->

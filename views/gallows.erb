@@ -26,11 +26,13 @@
 <% end %>
 
 <% if game_over? %>
-  <form action='/play_again' method='post'>
-    <p>Play again?</p>
-    <button type="submit" name="play_again" value="yes">yes</button>
-    <button type="submit" name="play_again" value="no">no</button>
-  </form>
+  <fieldset class="play-again">
+    <form action='/play_again' method='post'>
+      <p>Play again?</p>
+      <button type="submit" name="play_again" value="no">no</button>
+      <button type="submit" name="play_again" value="yes">yes</button>
+    </form>
+  </fieldset>
 <% end %>
 
 <ul class="secret-letter-list">

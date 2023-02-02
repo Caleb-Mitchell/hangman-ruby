@@ -32,7 +32,7 @@ div.alpha-grid {
   grid-gap: .8vw;
 }
 
-button.letter {
+button {
   padding: 1.5vw;
   font-size: 1.5vwmax;
   color: black;
@@ -42,8 +42,36 @@ button.letter {
   text-align: center;
 }
 
-button.letter:hover {
+button:hover {
   background-color: #cfcfd5;
+}
+
+button.start-button {
+  margin-left: -5vw;
+}
+
+/* button.start-button { */
+/*   padding: 1.5vw; */
+/*   font-size: 1.5vwmax; */
+/*   color: black; */
+/*   background-color: #e9e9ed; */
+/*   border: 1px solid #ddd; */
+/*   border-radius: 5px; */
+/*   text-align: center; */
+/*   margin-left: -5vw; */
+/* } */
+
+button.start-button:hover {
+  background-color: #cfcfd5;
+}
+
+fieldset.play-again button {
+  padding: 1vw;
+  width: 10vw;
+
+}
+fieldset.play-again p{
+  text-align: center;
 }
 
 .secret-letter-list li {

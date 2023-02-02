@@ -30,11 +30,11 @@ ul.secret-letter-list {
 div.alpha-grid {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
-  grid-gap: 8px;
+  grid-gap: .8vw;
 }
 
 button.letter {
-  padding: 1.5vw;
+  padding: 1.2vw;
   font-size: 1.5vwmax;
   border: 1px solid #ddd;
   border-radius: 5px;

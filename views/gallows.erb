@@ -33,10 +33,6 @@
   </form>
 <% end %>
 
-<p>
-  <%= @secret_word %>
-</p>
-
 <ul class="secret-letter-list">
   <% @filtered_letters.each do |letter| %>
     <li><%= "#{letter}" %></li>

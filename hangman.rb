@@ -10,37 +10,68 @@ configure do
   set :erb, escape_html: true
 end
 
-# TODO: I can make a grid of letters of the alphabet, and display for user
-# choice when letters are clicked I can hide them with css
+LEXICON = File.readlines("data/Lexicon.txt", chomp: true)
+TEST_LEXICON = File.readlines("data/TestLexicon.txt", chomp: true)
+ALPHA_LETTERS = ('a'..'z').to_a
+TOTAL_BODY_PARTS = 6
+
+def hide_letters(letters_arr)
+  letters_arr.map do |letter|
+    session[:player_guesses].include?(letter) ? letter : "_"
+  end
+end
+
+def reset_game
+  session[:secret_word] = LEXICON.sample.downcase
+  session[:player_guesses] = []
+  session[:available_letters] = ('a'..'z').to_a
+  session[:wrong_answer_count] = 0
+end
 
 get '/' do
+  redirect '/welcome'
+end
+
+# Welcome the user, say click to play
+get '/welcome' do
   erb :welcome
 end
 
-get '/empty_gallows' do
-  erb :empty_gallows
+# Create a hangman, and show empty gallows
+post '/welcome' do
+  reset_game
+
+  redirect '/gallows'
 end
 
-get '/head_only' do
-  erb :head_only
+# Show empty gallows, with underscores representing unguessed letters
+get '/gallows' do
+  @secret_word = session[:secret_word]
+
+  secret_letters = session[:secret_word].chars
+  @filtered_letters = hide_letters(secret_letters)
+
+  @available_letters = session[:available_letters]
+  @wrong_answer_count = session[:wrong_answer_count]
+
+  erb :gallows
 end
 
-get '/head_and_body' do
-  erb :head_and_body
+# Player guesses a letter
+post '/gallows' do
+  session[:player_guesses] << params[:letter_choice]
+  session[:available_letters].delete(params[:letter_choice])
+
+  unless session[:secret_word].chars.include?(params[:letter_choice])
+    session[:wrong_answer_count] += 1
+  end
+
+  redirect '/gallows'
 end
 
-get '/one_limb' do
-  erb :one_limb
-end
+post '/play_again' do
+  redirect '/welcome' if params[:play_again] == "no"
 
-get '/two_limbs' do
-  erb :two_limbs
-end
-
-get '/three_limbs' do
-  erb :three_limbs
-end
-
-get '/full_body' do
-  erb :full_body
+  reset_game
+  redirect '/gallows'
 end

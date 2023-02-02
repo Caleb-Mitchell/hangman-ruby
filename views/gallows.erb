@@ -17,17 +17,25 @@
   <% end %>
 </div>
 
-<% if @wrong_answer_count == TOTAL_BODY_PARTS %>
-  <p>The word was: <%= @secret_word %></p>
+<% if game_lost? %>
+  <h3>The word was: <%= @secret_word %></h3>
 <% end %>
 
-<% if @wrong_answer_count == TOTAL_BODY_PARTS %>
+<% if all_letters_found? %>
+  <h3>You win!</h3>
+<% end %>
+
+<% if game_over? %>
   <form action='/play_again' method='post'>
     <p>Play again?</p>
     <button type="submit" name="play_again" value="yes">yes</button>
     <button type="submit" name="play_again" value="no">no</button>
   </form>
 <% end %>
+
+<p>
+  <%= @secret_word %>
+</p>
 
 <ul class="secret-letter-list">
   <% @filtered_letters.each do |letter| %>

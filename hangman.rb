@@ -15,6 +15,20 @@ TEST_LEXICON = File.readlines("data/TestLexicon.txt", chomp: true)
 ALPHA_LETTERS = ('a'..'z').to_a
 TOTAL_BODY_PARTS = 6
 
+helpers do
+  def all_letters_found?
+    @filtered_letters.count { |letter| letter != "_"} == @filtered_letters.size
+  end
+
+  def game_lost?
+    @wrong_answer_count == TOTAL_BODY_PARTS
+  end
+
+  def game_over?
+    @wrong_answer_count == TOTAL_BODY_PARTS || all_letters_found?
+  end
+end
+
 def hide_letters(letters_arr)
   letters_arr.map do |letter|
     session[:player_guesses].include?(letter) ? letter : "_"

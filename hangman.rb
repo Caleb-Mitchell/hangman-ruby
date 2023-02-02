@@ -69,6 +69,7 @@ post '/gallows' do
   redirect '/gallows'
 end
 
+# Allow player to choose if they want to play again
 post '/play_again' do
   redirect '/welcome' if params[:play_again] == "no"
 

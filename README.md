@@ -10,3 +10,6 @@ again, this time from scratch and without boilerplate, as a simple webapp.
 
 This is a work in progress, and you can play at
 [https://hangman-sinatra.herokuapp.com/](https://hangman-sinatra.herokuapp.com/).
+
+## Screenshot:
+![Screenshot of mid game](https://caleb-mitchell.github.io/repo-readme-images/public/images/hangman_sinatra_screenshot.png)

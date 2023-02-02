@@ -33,11 +33,11 @@ div.alpha-grid {
 }
 
 button.letter {
-  padding: 1.2vw;
+  padding: 1.5vw;
   font-size: 1.5vwmax;
+  color: black;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #fff;
   text-align: center;
 }
 

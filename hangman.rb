@@ -17,7 +17,7 @@ TOTAL_BODY_PARTS = 6
 
 helpers do
   def all_letters_found?
-    @filtered_letters.count { |letter| letter != "_"} == @filtered_letters.size
+    @filtered_letters.count { |letter| letter != "_" } == @filtered_letters.size
   end
 
   def game_lost?
@@ -60,6 +60,8 @@ end
 
 # Show empty gallows, with underscores representing unguessed letters
 get '/gallows' do
+  redirect '/welcome' unless session[:secret_word]
+
   @secret_word = session[:secret_word]
 
   secret_letters = session[:secret_word].chars

@@ -1,0 +1,52 @@
+<div class="gallows">
+  <% case @wrong_answer_count %>
+  <% when 0 %>
+    <img src="/images/hangman_empty_gallows.svg" alt="empty gallows - game has just started">
+  <% when 1 %>
+    <img src="/images/hangman_head_only.svg" alt="just the head so far">
+  <% when 2 %>
+    <img src="/images/hangman_head_and_body.svg" alt="now the head and body">
+  <% when 3 %>
+    <img src="/images/hangman_one_limb.svg" alt="one limb!">
+  <% when 4 %>
+    <img src="/images/hangman_two_limbs.svg" alt="two limbs!!">
+  <% when 5 %>
+    <img src="/images/hangman_three_limbs.svg" alt="three limbs!!!!">
+  <% when 6 %>
+    <img src="/images/hangman_full_body.svg" alt="full hangman body - player loses">
+  <% end %>
+</div>
+
+<%= @secret_word %>
+
+<% if @wrong_answer_count == TOTAL_BODY_PARTS %>
+  <p>The word was: <%= @secret_word %></p>
+<% end %>
+
+<% if @wrong_answer_count == TOTAL_BODY_PARTS %>
+  <form action='/play_again' method='post'>
+    <p>Play again?</p>
+    <button type="submit" name="play_again" value="yes">yes</button>
+    <button type="submit" name="play_again" value="no">no</button>
+  </form>
+<% end %>
+
+<ul class="secret-letter-list">
+  <% @filtered_letters.each do |letter| %>
+    <li><%= "#{letter}" %></li>
+  <% end %>
+</ul>
+
+<form method="post" action="/gallows">
+  <div class="alpha-grid">
+      <% ALPHA_LETTERS.each do |alpha_letter| %>
+        <% if @available_letters.include?(alpha_letter) %>
+          <button class="letter" type="submit" name="letter_choice"
+                  value="<%= alpha_letter %>"><%= alpha_letter %></button>
+        <% else %>
+          <button class="letter" type="submit" name="letter_choice"
+                  value="<%= alpha_letter %>" disabled><%= alpha_letter %></button>
+        <% end %>
+    <% end %>
+  </div>
+</form>

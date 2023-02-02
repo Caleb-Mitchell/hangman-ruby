@@ -76,6 +76,8 @@ end
 
 # Player guesses a letter
 post '/gallows' do
+  redirect '/welcome' unless session[:secret_word]
+
   session[:player_guesses] << params[:letter_choice]
   session[:available_letters].delete(params[:letter_choice])
 

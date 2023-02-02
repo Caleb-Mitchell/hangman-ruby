@@ -40,6 +40,7 @@ def reset_game
   session[:player_guesses] = []
   session[:available_letters] = ('a'..'z').to_a
   session[:wrong_answer_count] = 0
+  session[:wrong_guess] = nil
 end
 
 get '/' do
@@ -78,8 +79,11 @@ post '/gallows' do
   session[:player_guesses] << params[:letter_choice]
   session[:available_letters].delete(params[:letter_choice])
 
-  unless session[:secret_word].chars.include?(params[:letter_choice])
+  if session[:secret_word].chars.include?(params[:letter_choice])
+    session[:wrong_guess] = nil
+  else
     session[:wrong_answer_count] += 1
+    session[:wrong_guess] = params[:letter_choice]
   end
 
   redirect '/gallows'

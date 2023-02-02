@@ -54,3 +54,7 @@
     <% end %>
   </div>
 </form>
+
+<% if session[:wrong_guess] %>
+  <h2 class="wrong-letter">No '<%= session[:wrong_guess] %>' found!</h2>
+<% end %>

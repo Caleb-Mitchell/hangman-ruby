@@ -1,10 +1,10 @@
 # HANGMAN
 
 A hangman word guessing game, written in Ruby, built into a simple web app
-using sinatra, and hosted on heroku.
+using Sinatra, and hosted on Heroku.
 
 This was made in the effort to rebuild my final project for Stanford's CS106A
-(which I took in the form of [code in place](https://codeinplace.stanford.edu/),
+(which I took in the form of [Code In Place](https://codeinplace.stanford.edu/),
 a fantastic introduction to coding). I wanted to build this simple game once
 again, this time from scratch and without boilerplate, as a simple webapp.
 

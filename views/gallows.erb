@@ -29,32 +29,62 @@
   <fieldset class="play-again">
     <form action='/play_again' method='post'>
       <p>Play again?</p>
-      <button type="submit" name="play_again" value="no">no</button>
-      <button type="submit" name="play_again" value="yes">yes</button>
+      <div class="play-again-buttons">
+        <button type="submit" name="play_again" value="no">no</button>
+        <button type="submit" name="play_again" value="yes">yes</button>
+      </div>
     </form>
   </fieldset>
 <% end %>
 
-<ul class="secret-letter-list">
-  <% @filtered_letters.each do |letter| %>
-    <li><%= "#{letter}" %></li>
-  <% end %>
-</ul>
-
-<form class="alpha-form" method="post" action="/gallows">
-  <div class="alpha-grid">
-      <% ALPHA_LETTERS.each do |alpha_letter| %>
-        <% if @available_letters.include?(alpha_letter) %>
-          <button class="letter" type="submit" name="letter_choice"
-                  value="<%= alpha_letter %>"><%= alpha_letter %></button>
-        <% else %>
-          <button class="letter" type="submit" name="letter_choice"
-                  value="<%= alpha_letter %>" disabled> </button>
-        <% end %>
+<div class="secret-letter-list">
+  <ul class="secret-letter-list">
+    <% @filtered_letters.each do |letter| %>
+      <li><%= "#{letter}" %></li>
     <% end %>
-  </div>
-</form>
+  </ul>
+</div>
+
+<div class="alpha-pick">
+  <form class="alpha-form" method="post" action="/gallows">
+    <div class="alpha-grid">
+      <div class="alpha-grid-1">
+        <% ALPHA_LETTERS[0..9].each do |alpha_letter| %>
+          <% if @available_letters.include?(alpha_letter) %>
+            <button class="letter" type="submit" name="letter_choice"
+              value="<%= alpha_letter %>"><%= alpha_letter %></button>
+          <% else %>
+            <button class="letter" type="submit" name="letter_choice"
+              value="<%= alpha_letter %>" disabled> </button>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="alpha-grid-2">
+        <% ALPHA_LETTERS[10..18].each do |alpha_letter| %>
+          <% if @available_letters.include?(alpha_letter) %>
+            <button class="letter" type="submit" name="letter_choice"
+              value="<%= alpha_letter %>"><%= alpha_letter %></button>
+          <% else %>
+            <button class="letter" type="submit" name="letter_choice"
+              value="<%= alpha_letter %>" disabled> </button>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="alpha-grid-3">
+        <% ALPHA_LETTERS[19..26].each do |alpha_letter| %>
+          <% if @available_letters.include?(alpha_letter) %>
+            <button class="letter" type="submit" name="letter_choice"
+              value="<%= alpha_letter %>"><%= alpha_letter %></button>
+          <% else %>
+            <button class="letter" type="submit" name="letter_choice"
+              value="<%= alpha_letter %>" disabled> </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </form>
+</div>
 
 <% if session[:wrong_guess] %>
-  <h2 class="wrong-letter">No '<%= session[:wrong_guess] %>' found!</h2>
+  <h4 class="wrong-letter"><em>No '<%= session[:wrong_guess] %>' found!</em></h2>
 <% end %>

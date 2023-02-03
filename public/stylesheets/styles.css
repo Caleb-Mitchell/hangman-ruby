@@ -118,7 +118,7 @@ fieldset.play-again p {
   }
 
   div.gallows {
-    margin-top: .5rem;
+    margin-top: -.5rem;
     width: 110%;
     max-height: 600px;
     max-width: 600px;
@@ -126,5 +126,10 @@ fieldset.play-again p {
 
   button {
     font-size: 2vh;
+  }
+
+  button.start-button {
+    margin-top: -3vh;
+    font-size: 2.5vh;
   }
 }

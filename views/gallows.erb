@@ -1,4 +1,4 @@
-<div class="gallows">
+<section class="gallows">
   <% case @wrong_answer_count %>
   <% when 0 %>
     <img src="/images/hangman_empty_gallows.svg" alt="empty gallows - game has just started">
@@ -15,7 +15,7 @@
   <% when 6 %>
     <img src="/images/hangman_full_body.svg" alt="full hangman body - player loses">
   <% end %>
-</div>
+</section>
 
 <% if game_lost? %>
   <h3>The word was: <%= @secret_word %></h3>
@@ -37,15 +37,15 @@
   </fieldset>
 <% end %>
 
-<div class="secret-letter-list">
+<section class="secret-letter-list">
   <ul class="secret-letter-list">
     <% @filtered_letters.each do |letter| %>
       <li><%= "#{letter}" %></li>
     <% end %>
   </ul>
-</div>
+</section>
 
-<div class="alpha-pick">
+<section class="alpha-pick">
   <form class="alpha-form" method="post" action="/gallows">
     <div class="alpha-grid">
       <div class="alpha-grid-1">
@@ -83,7 +83,7 @@
       </div>
     </div>
   </form>
-</div>
+</section>
 
 <% if session[:wrong_guess] %>
   <h4 class="wrong-letter"><em>No '<%= session[:wrong_guess] %>' found!</em></h2>

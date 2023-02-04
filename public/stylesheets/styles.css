@@ -12,18 +12,14 @@ h1 {
   justify-content: center;
 }
 
-div.gallows {
+section.gallows {
   margin-top: -2rem;
   width: 80%;
   max-height: 500px;
   max-width: 500px;
 }
 
-div.secret-letter-list {
-  max-width: 95%;
-}
-
-div.alpha-pick {
+section.alpha-pick {
   width: 100%;
   margin-top: 1vh;
 }
@@ -35,7 +31,9 @@ div.alpha-grid {
   width: 100%;
 }
 
-div.alpha-grid-1, div.alpha-grid-2, div.alpha-grid-3 {
+div.alpha-grid-1,
+div.alpha-grid-2,
+div.alpha-grid-3 {
   display: flex;
   justify-content: space-between;
   grid-gap: 3vw;
@@ -77,7 +75,7 @@ button:hover {
 }
 
 button.start-button {
-  margin-left: -5vw;
+  margin-left: 6vh;
 }
 
 button.start-button:hover {
@@ -99,7 +97,7 @@ fieldset.play-again p {
 
 .secret-letter-list li {
   list-style: none;
-  margin: 0 .4vw 0;
+  margin: 0 0.4vw 0;
   font-size: 8vw;
 }
 
@@ -117,8 +115,8 @@ fieldset.play-again p {
     margin-top: 2rem;
   }
 
-  div.gallows {
-    margin-top: -.5rem;
+  section.gallows {
+    margin-top: -0.5rem;
     width: 110%;
     max-height: 600px;
     max-width: 600px;
@@ -131,5 +129,47 @@ fieldset.play-again p {
   button.start-button {
     margin-top: -3vh;
     font-size: 2.5vh;
+    margin-left: 8vh;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  button.letter {
+    width: 5vw;
+    padding: 1vw;
+  }
+
+  div.alpha-grid {
+    grid-gap: 2vh;
+  }
+
+  div.alpha-grid-1,
+  div.alpha-grid-2,
+  div.alpha-grid-3 {
+    grid-gap: 2vw;
+  }
+
+  .secret-letter-list li {
+    font-size: 4vw;
+  }
+
+  @media only screen and (min-width: 2000px) {
+    button.letter {
+      width: 4vw;
+    }
+
+    div.alpha-grid {
+      grid-gap: 1.5vh;
+    }
+
+    div.alpha-grid-1,
+    div.alpha-grid-2,
+    div.alpha-grid-3 {
+      grid-gap: 1.5vw;
+    }
+
+    .secret-letter-list li {
+      font-size: 3vw;
+    }
   }
 }

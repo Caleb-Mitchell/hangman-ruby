@@ -89,11 +89,11 @@ button.letter {
 }
 
 button.correct {
-  border: .5px solid green;
+  border: 1px solid green;
 }
 
 button.incorrect {
-  border: .5px solid red;
+  border: 1px solid red;
 }
 
 button.guessed {
@@ -115,6 +115,7 @@ button.start-button:hover {
 
 fieldset.play-again {
   margin-bottom: 2vh;
+  width: 30%;
 }
 
 fieldset.play-again button {

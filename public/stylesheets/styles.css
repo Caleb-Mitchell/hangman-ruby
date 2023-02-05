@@ -1,3 +1,7 @@
+body {
+  height: 100%;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -10,6 +14,20 @@ h1 {
   margin-bottom: -2vh;
   display: flex;
   justify-content: center;
+}
+
+h2.ep-title {
+  margin-top: auto;
+}
+
+h4.ep-title {
+  margin-top: auto;
+}
+
+h5.ep-description {
+  font-style: italic;
+  margin-top: auto;
+  text-align: center;
 }
 
 section.gallows {
@@ -70,7 +88,20 @@ button.letter {
   width: 6vw;
 }
 
-button:hover {
+button.correct {
+  border: .5px solid green;
+}
+
+button.incorrect {
+  border: .5px solid red;
+}
+
+button.guessed {
+  background-color: #cfcfd5;
+}
+
+
+button.avail:hover {
   background-color: #cfcfd5;
 }
 
@@ -99,6 +130,14 @@ fieldset.play-again p {
   list-style: none;
   margin: 0 0.4vw 0;
   font-size: 8vw;
+}
+
+.wrong-letter {
+  color: red;
+}
+
+.right-letter {
+  color: green;
 }
 
 @media only screen and (max-width: 450px) {

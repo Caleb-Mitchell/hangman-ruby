@@ -18,7 +18,14 @@
 </section>
 
 <% if game_lost? %>
-  <h3>The word was: <%= @secret_word %></h3>
+  <h4 class="ep-title">The episode title was:</h3>
+  <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>"</h2>
+<% end %>
+
+<% if game_over? %>
+  <div>
+    <h5 class="ep-description"><%= display_definition %></h5>
+  </div>
 <% end %>
 
 <% if all_letters_found? %>
@@ -38,53 +45,46 @@
 <% end %>
 
 <section class="secret-letter-list">
-  <ul class="secret-letter-list">
-    <% @filtered_letters.each do |letter| %>
-      <li><%= "#{letter}" %></li>
-    <% end %>
-  </ul>
+  <% @filtered_words.each do |word_group| %>
+    <ul class="secret-letter-list">
+      <% word_group.each_with_index do |letter, idx| %>
+        <% if letter == " " %>
+          <li>&nbsp;&nbsp;</li>
+        <% elsif word_group[idx - 1] == " " || idx == 0 %>
+          <li><%= letter.capitalize %></li>
+        <% else %>
+          <li><%= letter %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
 </section>
 
 <section class="alpha-pick">
   <form class="alpha-form" method="post" action="/gallows">
     <div class="alpha-grid">
-      <div class="alpha-grid-1">
-        <% ALPHA_LETTERS[0..9].each do |alpha_letter| %>
-          <% if @available_letters.include?(alpha_letter) %>
-            <button class="letter" type="submit" name="letter_choice"
-              value="<%= alpha_letter %>"><%= alpha_letter %></button>
-          <% else %>
-            <button class="letter" type="submit" name="letter_choice"
-              value="<%= alpha_letter %>" disabled> </button>
+      <% { 1 => (0..9), 2 => (10..18), 3 => (19..26) }.each do |rows, cols| %>
+        <div class="alpha-grid-<%= "#{rows}" %>">
+          <% ALPHA_LETTERS[cols].each do |alpha_letter| %>
+            <% if @available_letters.include?(alpha_letter) %>
+              <button class="letter avail" type="submit" name="letter_choice"
+                value="<%= alpha_letter %>"><%= alpha_letter %></button>
+            <% elsif @filtered_words.flatten.include?(alpha_letter) %>
+              <button class="letter correct guessed" type="submit" name="letter_choice"
+                value="<%= alpha_letter %>"><%= alpha_letter %></button>
+            <% else %>
+              <button class="letter incorrect guessed" type="submit" name="letter_choice"
+                value="<%= alpha_letter %>" disabled><%= alpha_letter %></button>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <div class="alpha-grid-2">
-        <% ALPHA_LETTERS[10..18].each do |alpha_letter| %>
-          <% if @available_letters.include?(alpha_letter) %>
-            <button class="letter" type="submit" name="letter_choice"
-              value="<%= alpha_letter %>"><%= alpha_letter %></button>
-          <% else %>
-            <button class="letter" type="submit" name="letter_choice"
-              value="<%= alpha_letter %>" disabled> </button>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="alpha-grid-3">
-        <% ALPHA_LETTERS[19..26].each do |alpha_letter| %>
-          <% if @available_letters.include?(alpha_letter) %>
-            <button class="letter" type="submit" name="letter_choice"
-              value="<%= alpha_letter %>"><%= alpha_letter %></button>
-          <% else %>
-            <button class="letter" type="submit" name="letter_choice"
-              value="<%= alpha_letter %>" disabled> </button>
-          <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </form>
 </section>
 
 <% if session[:wrong_guess] %>
-  <h4 class="wrong-letter"><em>No '<%= session[:wrong_guess] %>' found!</em></h2>
+  <h4 class="wrong-letter"><em>No '<%= session[:wrong_guess].upcase %>' found!</em></h2>
+<% elsif !session[:player_guesses].empty? %>
+  <h4 class="right-letter"><em>'<%= session[:player_guesses].last.upcase %>' found!</em></h2>
 <% end %>

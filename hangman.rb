@@ -46,7 +46,8 @@ end
 
 def set_episode
   episode = random_episode
-  session[:secret_word] = episode["data"]["title"].downcase
+  # session[:secret_word] = episode["data"]["title"].downcase
+  session[:secret_word] = "Take Your Daugher To Work Day".downcase
   session[:episode_desc] = episode["data"]["description"]
 end
 

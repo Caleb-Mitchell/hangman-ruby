@@ -20,7 +20,7 @@
 <section class="episode-info">
   <% if all_letters_found? %>
     <h4 class="you-win">You Win!!</h3>
-  <% else %>
+  <% elsif game_over? %>
     <h4 class="you-lose">The episode title is:</h3>
   <% end %>
   <% if game_over? %>

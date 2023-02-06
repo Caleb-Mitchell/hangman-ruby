@@ -5,7 +5,7 @@ require "sinatra/reloader" if development?
 require "tilt/erubis"
 
 SECRET = SecureRandom.hex(32)
-IMDB_API_KEY = ENV.fetch("IMDB_API_KEY", nil) if testing?
+IMDB_API_KEY = ENV.fetch("IMDB_API_KEY", nil) if development?
 
 configure do
   enable :sessions
@@ -52,6 +52,7 @@ def set_episode
   episode = random_episode
   session[:secret_word] = episode["title"].downcase
   session[:episode_desc] = episode["plot"]
+  session[:episode_img_path] = episode["image"]
 end
 
 def reset_game
@@ -105,6 +106,7 @@ get '/gallows' do
   end
   @filtered_words.map! { |word_group| hide_letters(word_group.chars) }
 
+  @img_path = session[:episode_img_path]
   @available_letters = session[:available_letters]
   @wrong_answer_count = session[:wrong_answer_count]
 

@@ -60,8 +60,9 @@ div.alpha-grid-3 {
 
 div.play-again-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 3rem;
 }
 
 ul.secret-letter-list {

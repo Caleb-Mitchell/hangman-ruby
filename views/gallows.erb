@@ -33,8 +33,9 @@
 <% end %>
 
 <% if game_over? %>
-  <img src="<%= @img_path %>" alt="A picture from this episode.">
   <fieldset class="play-again">
+    <img src="<%= @img_path %>" alt="A picture from this episode.">
+
     <form action='/play_again' method='post'>
       <p>Play again?</p>
       <div class="play-again-buttons">

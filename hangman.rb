@@ -33,7 +33,7 @@ helpers do
     @wrong_answer_count == TOTAL_BODY_PARTS || all_letters_found?
   end
 
-  def display_definition
+  def display_description
     session.delete(:episode_desc)
   end
 

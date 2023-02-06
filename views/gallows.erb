@@ -32,7 +32,7 @@
   <% end %>
 
   <% if game_over? %>
-    <h5 class="ep-description"><%= display_definition %></h5>
+    <p class="ep-description"><%= display_description %></p>
   <% end %>
 </section>
 
@@ -43,7 +43,7 @@
 
   <fieldset class="play-again">
     <form action='/play_again' method='post'>
-      <p>Play again?</p>
+      <p class="play-again">Play again?</p>
       <div class="play-again-buttons">
         <button type="submit" name="play_again" value="no">no</button>
         <button type="submit" name="play_again" value="yes">yes</button>

@@ -40,10 +40,11 @@ h4.you-lose {
   text-align: center;
 }
 
-h5.ep-description {
+p.ep-description {
   font-style: italic;
   text-align: center;
-  margin-top: auto;
+  margin: auto auto 1em;
+  width: 70%;
 }
 
 section.gallows {
@@ -197,6 +198,11 @@ fieldset.play-again p {
 
   button.start-button {
     font-size: 2.5vh;
+  }
+
+
+  p.ep-description {
+    width: 100%;
   }
 }
 

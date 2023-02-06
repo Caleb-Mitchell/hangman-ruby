@@ -4,7 +4,7 @@ A hangman word guessing game, written in Ruby, built into a simple web app
 using Sinatra, and hosted on Heroku, here: [https://office-hangman.herokuapp.com/](https://hangman-sinatra.herokuapp.com/).
 
 
-In this version of hangman, you try to guess the title of random episodes from tv show ["The Office"](https://en.wikipedia.org/wiki/The_Office_(American_TV_series)).
+In this version of hangman, you try to guess the title of episodes chosen at random from the popular TV show ["The Office"](https://en.wikipedia.org/wiki/The_Office_(American_TV_series)).
 
 I utilize the [IMDB API](https://imdb-api.com/) in order to query and utilize episode data from the tv series, including
 a random episode's title, the season number for the episode, a description of the episode's plot, and a

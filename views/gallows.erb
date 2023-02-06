@@ -17,25 +17,25 @@
   <% end %>
 </section>
 
-<% if game_lost? %>
-  <h4 class="ep-title">The episode title was:</h3>
-  <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>"</h2>
-<% end %>
+<section class="episode-info">
+  <% if game_over? %>
+    <h4 class="ep-title">The episode title was:</h3>
+    <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>"</h2>
+  <% end %>
 
-<% if game_over? %>
-  <div>
+  <% if game_over? %>
     <h5 class="ep-description"><%= display_definition %></h5>
-  </div>
-<% end %>
+  <% end %>
 
-<% if all_letters_found? %>
-  <h3>You win!</h3>
-<% end %>
+  <% if all_letters_found? %>
+    <h3>You win!</h3>
+  <% end %>
+</section>
 
 <% if game_over? %>
-  <fieldset class="play-again">
-    <img src="<%= @img_path %>" alt="A picture from this episode.">
+  <img class="ep-image" src="<%= @img_path %>" alt="A picture from this episode.">
 
+  <fieldset class="play-again">
     <form action='/play_again' method='post'>
       <p>Play again?</p>
       <div class="play-again-buttons">

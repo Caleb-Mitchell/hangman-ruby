@@ -24,10 +24,14 @@ h4.ep-title {
   margin-top: 3vh;
 }
 
+h2.ep-title, h4.ep-title {
+  text-align: center;
+}
+
 h5.ep-description {
   font-style: italic;
-  margin-top: auto;
   text-align: center;
+  margin-top: auto;
 }
 
 section.gallows {
@@ -35,6 +39,13 @@ section.gallows {
   width: 80%;
   max-height: 500px;
   max-width: 500px;
+}
+
+section.episode-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: -6vh;
 }
 
 section.alpha-pick {
@@ -53,7 +64,6 @@ div.alpha-grid-1,
 div.alpha-grid-2,
 div.alpha-grid-3 {
   display: flex;
-  justify-content: space-between;
   grid-gap: 3vw;
   justify-content: center;
 }
@@ -63,6 +73,11 @@ div.play-again-buttons {
   justify-content: center;
   align-items: center;
   gap: 3rem;
+}
+
+img.ep-image {
+  width: 80%;
+  margin: 0 auto;
 }
 
 ul.secret-letter-list {
@@ -115,7 +130,7 @@ button.start-button:hover {
 }
 
 fieldset.play-again {
-  margin-bottom: 2vh;
+  margin: 2vh 0;
   width: 30%;
 }
 
@@ -125,6 +140,7 @@ fieldset.play-again button {
 }
 
 fieldset.play-again p {
+  margin-top: 2vh;
   text-align: center;
 }
 
@@ -158,6 +174,10 @@ fieldset.play-again p {
     width: 90%;
     max-height: 600px;
     max-width: 600px;
+  }
+
+  section.episode-info {
+    margin-top: 0;
   }
 
   button {

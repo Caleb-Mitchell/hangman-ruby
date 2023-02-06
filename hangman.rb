@@ -36,6 +36,10 @@ helpers do
   def display_definition
     session.delete(:episode_desc)
   end
+
+  def view_dev?
+    DEV
+  end
 end
 
 def hide_letters(letters_arr)
@@ -56,6 +60,7 @@ def set_episode
     session[:episode_desc] = episode["description"]
   else
     session[:episode_desc] = episode["plot"]
+    session[:season_num] = episode["seasonNumber"]
     session[:episode_img_path] = episode["image"]
   end
   session[:secret_word] = episode["title"].downcase
@@ -116,6 +121,7 @@ get '/gallows' do
   end
   @filtered_words.map! { |word_group| hide_letters(word_group.chars) }
 
+  @season_num = session[:season_num]
   @img_path = session[:episode_img_path]
   @available_letters = session[:available_letters]
   @wrong_answer_count = session[:wrong_answer_count]

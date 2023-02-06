@@ -24,6 +24,9 @@
     <h4 class="you-lose">The episode title is:</h3>
   <% end %>
   <% if game_over? %>
+    <% unless view_dev? %>
+      <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>" - Season: <%= @season_num %>)</h2>
+    <% end %>
     <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>"</h2>
   <% end %>
 
@@ -33,7 +36,9 @@
 </section>
 
 <% if game_over? %>
-  <img class="ep-image" src="<%= @img_path %>" alt="A picture from this episode.">
+  <% unless view_dev? %>
+    <img class="ep-image" src="<%= @img_path %>" alt="A picture from this episode.">
+  <% end %>
 
   <fieldset class="play-again">
     <form action='/play_again' method='post'>

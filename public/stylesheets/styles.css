@@ -81,6 +81,7 @@ img.ep-image {
   width: 80%;
   max-width: 600px;
   margin: 0 auto;
+  text-align: center;
 }
 
 ul.secret-letter-list {

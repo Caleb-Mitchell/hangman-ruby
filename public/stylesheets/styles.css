@@ -9,6 +9,16 @@ main {
   justify-content: center;
 }
 
+p.try-to-guess {
+  text-align: center;
+}
+
+section.start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h1 {
   margin-top: 1rem;
   margin-bottom: -2vh;
@@ -104,6 +114,10 @@ button {
   text-align: center;
 }
 
+button.start-button {
+  margin-top: 2em;
+}
+
 button.letter {
   width: 6vw;
 }
@@ -123,10 +137,6 @@ button.guessed {
 
 button.avail:hover {
   background-color: #cfcfd5;
-}
-
-button.start-button {
-  margin-left: 6vh;
 }
 
 button.start-button:hover {
@@ -166,10 +176,7 @@ fieldset.play-again p {
   h1 {
     margin-top: 2rem;
     margin-bottom: -5vh;
-  }
-
-  div.start-button {
-    margin-top: 2rem;
+    font-size: 1.5em;
   }
 
   section.gallows {
@@ -189,9 +196,7 @@ fieldset.play-again p {
   }
 
   button.start-button {
-    margin-top: -3vh;
     font-size: 2.5vh;
-    margin-left: 8vh;
   }
 }
 

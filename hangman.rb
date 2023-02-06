@@ -12,7 +12,7 @@ configure do
   set :erb, escape_html: true
 end
 
-ALPHA_LETTERS = ('a'..'z').to_a
+ALPHA_LETTERS = %w(q w e r t y u i o p a s d f g h j k l z x c v b n m)
 TOTAL_BODY_PARTS = 6
 OFFICE_SEASON_COUNT = 9
 SHOW_IMDB_ID = "tt0386676" # IMBD ID For: The Office

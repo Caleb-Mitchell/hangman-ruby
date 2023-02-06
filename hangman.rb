@@ -1,11 +1,11 @@
-require "dotenv/load"
+require "dotenv/load" if development?
 require "httparty"
 require "sinatra"
 require "sinatra/reloader" if development?
 require "tilt/erubis"
 
 SECRET = SecureRandom.hex(32)
-IMDB_API_KEY = ENV.fetch("IMDB_API_KEY", nil) if development?
+IMDB_API_KEY = ENV.fetch("IMDB_API_KEY", nil)
 
 configure do
   enable :sessions

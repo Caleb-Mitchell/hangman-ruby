@@ -52,6 +52,12 @@ def hide_letters(letters_arr)
   end
 end
 
+def store_ep_details(episode)
+  session[:episode_desc] = episode["plot"]
+  session[:season_num] = episode["seasonNumber"]
+  session[:episode_img_path] = episode["image"]
+end
+
 def set_episode
   episode = random_episode_test if DEV
   episode = random_episode_prod unless DEV
@@ -59,9 +65,7 @@ def set_episode
   if DEV
     session[:episode_desc] = episode["description"]
   else
-    session[:episode_desc] = episode["plot"]
-    session[:season_num] = episode["seasonNumber"]
-    session[:episode_img_path] = episode["image"]
+    store_ep_details(episode)
   end
   session[:secret_word] = episode["title"].downcase
 end

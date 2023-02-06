@@ -35,7 +35,7 @@ h5.ep-description {
 }
 
 section.gallows {
-  margin-top: -2rem;
+  margin: -2rem 0 2vh;
   width: 80%;
   max-height: 500px;
   max-width: 500px;

@@ -73,7 +73,7 @@ def game_in_progress?
   session[:secret_word] && session[:episode_desc]
 end
 
-# free api has not limit on queries, but only has episodes from seaon 1
+# free api has no limit on queries, but does not have images
 def random_episode_test
   HTTParty.get("https://officeapi.dev/api/episodes/random/")["data"]
 end

@@ -1,4 +1,3 @@
-require "dotenv/load" if development?
 require "httparty"
 require "sinatra"
 require "sinatra/reloader" if development?

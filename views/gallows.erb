@@ -24,10 +24,11 @@
     <h4 class="you-lose">The episode title is:</h3>
   <% end %>
   <% if game_over? %>
-    <% unless view_dev? %>
-      <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>" - Season: <%= @season_num %>)</h2>
+    <% if view_dev? %>
+      <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>"</h2>
+    <% else %>
+      <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>" - Season: <%= @season_num %></h2>
     <% end %>
-    <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>"</h2>
   <% end %>
 
   <% if game_over? %>

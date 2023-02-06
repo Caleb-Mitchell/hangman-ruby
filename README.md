@@ -16,6 +16,9 @@ a fantastic introduction to coding). I wanted to build this simple game once
 again, this time from scratch and without boilerplate, as a webapp with expanded features.
 
 ## Screenshots:
+#### Welcome:
 ![Screenshot of Welcome Page](https://caleb-mitchell.github.io/repo-readme-images/public/images/office_hangman_welcome.png)
+#### Mid-Game:
 ![Screenshot of Mid Game](https://caleb-mitchell.github.io/repo-readme-images/public/images/office_hangman_mid_game.png)
+#### End of Game:
 ![Screenshot of End Game You Win](https://caleb-mitchell.github.io/repo-readme-images/public/images/office_hangman_you_win.png)

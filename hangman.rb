@@ -4,7 +4,7 @@ require "sinatra/reloader" if development?
 require "tilt/erubis"
 
 SECRET = SecureRandom.hex(32)
-IMDB_API_KEY = ENV.fetch("IMDB_API_KEY", nil)
+IMDB_API_KEY = ENV.fetch("IMDB_API_KEY", nil) if production?
 
 configure do
   enable :sessions
@@ -16,6 +16,7 @@ ALPHA_LETTERS = %w(q w e r t y u i o p a s d f g h j k l z x c v b n m)
 TOTAL_BODY_PARTS = 6
 OFFICE_SEASON_COUNT = 9
 SHOW_IMDB_ID = "tt0386676" # IMBD ID For: The Office
+DEV = true if development?
 
 helpers do
   def all_letters_found?
@@ -48,10 +49,16 @@ def hide_letters(letters_arr)
 end
 
 def set_episode
-  episode = random_episode
+  episode = random_episode_test if DEV
+  episode = random_episode_prod unless DEV
+
+  if DEV
+    session[:episode_desc] = episode["description"]
+  else
+    session[:episode_desc] = episode["plot"]
+    session[:episode_img_path] = episode["image"]
+  end
   session[:secret_word] = episode["title"].downcase
-  session[:episode_desc] = episode["plot"]
-  session[:episode_img_path] = episode["image"]
 end
 
 def reset_game
@@ -66,8 +73,12 @@ def game_in_progress?
   session[:secret_word] && session[:episode_desc]
 end
 
-def random_episode
-  # HTTParty.get("https://officeapi.dev/api/episodes/random/")
+# free api has not limit on queries, but only has episodes from seaon 1
+def random_episode_test
+  HTTParty.get("https://officeapi.dev/api/episodes/random/")["data"]
+end
+
+def random_episode_prod
   random_season_num = (1..OFFICE_SEASON_COUNT).to_a.sample # not zero-indexed
   season = HTTParty.get(
     "https://imdb-api.com/en/API/SeasonEpisodes/#{IMDB_API_KEY}/#{SHOW_IMDB_ID}/#{random_season_num}",

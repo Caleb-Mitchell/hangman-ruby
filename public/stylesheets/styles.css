@@ -18,13 +18,15 @@ h1 {
 
 h2.ep-title {
   margin-top: auto;
+  text-align: center;
 }
 
-h4.ep-title {
-  margin-top: 3vh;
+h4.you-win {
+  text-align: center;
+  color: green;
 }
 
-h2.ep-title, h4.ep-title {
+h4.you-lose {
   text-align: center;
 }
 

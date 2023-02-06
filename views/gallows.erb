@@ -18,17 +18,17 @@
 </section>
 
 <section class="episode-info">
+  <% if all_letters_found? %>
+    <h4 class="you-win">You Win!!</h3>
+  <% else %>
+    <h4 class="you-lose">The episode title is:</h3>
+  <% end %>
   <% if game_over? %>
-    <h4 class="ep-title">The episode title was:</h3>
     <h2 class="ep-title">"<%= @secret_word.split.map(&:capitalize).join(" ") %>"</h2>
   <% end %>
 
   <% if game_over? %>
     <h5 class="ep-description"><%= display_definition %></h5>
-  <% end %>
-
-  <% if all_letters_found? %>
-    <h3>You win!</h3>
   <% end %>
 </section>
 

@@ -59,8 +59,7 @@ def store_ep_details(episode)
 end
 
 def set_episode
-  episode = random_episode_test if DEV
-  episode = random_episode_prod unless DEV
+  episode = (DEV ? random_episode_dev : random_episode_prod)
 
   if DEV
     session[:episode_desc] = episode["description"]
@@ -83,7 +82,7 @@ def game_in_progress?
 end
 
 # free api has no limit on queries, but does not have images
-def random_episode_test
+def random_episode_dev
   HTTParty.get("https://officeapi.dev/api/episodes/random/")["data"]
 end
 
@@ -94,8 +93,8 @@ def random_episode_prod
     headers: { 'Content-Type' => 'application/json' }
   ).parsed_response
 
-  random_season_num = season["episodes"].size
-  season["episodes"][random_season_num - 1] # episodes are zero-indexed
+  season_size = season["episodes"].size
+  season["episodes"][season_size - 1] # episodes are zero-indexed
 end
 
 get '/' do

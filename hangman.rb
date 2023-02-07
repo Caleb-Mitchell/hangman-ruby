@@ -93,8 +93,7 @@ def random_episode_prod
     headers: { 'Content-Type' => 'application/json' }
   ).parsed_response
 
-  season_size = season["episodes"].size
-  season["episodes"][season_size - 1] # episodes are zero-indexed
+  season["episodes"].sample # episodes are zero-indexed
 end
 
 get '/' do

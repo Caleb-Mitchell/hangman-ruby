@@ -37,7 +37,6 @@ helpers do
     session.delete(:episode_desc)
   end
 
-  def view_dev?
     DEV
   end
 end

@@ -16,7 +16,6 @@ ALPHA_LETTERS = %w(q w e r t y u i o p a s d f g h j k l z x c v b n m)
 TOTAL_BODY_PARTS = 6
 OFFICE_SEASON_COUNT = 9
 SHOW_IMDB_ID = "tt0386676" # IMBD ID For: The Office
-DEV = development?
 
 helpers do
   def all_letters_found?
@@ -37,7 +36,6 @@ helpers do
     session.delete(:episode_desc)
   end
 
-    DEV
   end
 end
 
@@ -58,9 +56,6 @@ def store_ep_details(episode)
 end
 
 def set_episode
-  episode = (DEV ? random_episode_dev : random_episode_prod)
-
-  if DEV
     session[:episode_desc] = episode["description"]
   else
     store_ep_details(episode)

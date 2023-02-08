@@ -26,11 +26,6 @@
 <% end %>
 
 <section class="episode-info">
-  <% if all_letters_found? %>
-    <h4 class="you-win">You Win!!</h3>
-  <% elsif game_over? %>
-    <h4 class="you-lose">The episode title is:</h3>
-  <% end %>
   <% if game_over? %>
     <% if !view_prod? %>
       <h2 class="ep-title">"<%= display_title %>"</h2>
@@ -45,7 +40,7 @@
 </section>
 
 <% if game_over? %>
-  <% unless view_dev? %>
+  <% unless !view_prod? %>
     <img class="ep-image" src="<%= @img_path %>" alt="A picture from this episode.">
   <% end %>
 

@@ -1,19 +1,23 @@
 <section class="gallows">
-  <% case @wrong_answer_count %>
-  <% when 0 %>
-    <img src="/images/hangman_empty_gallows.svg" alt="empty gallows - game has just started">
-  <% when 1 %>
-    <img src="/images/hangman_head_only.svg" alt="just the head so far">
-  <% when 2 %>
-    <img src="/images/hangman_head_and_body.svg" alt="now the head and body">
-  <% when 3 %>
-    <img src="/images/hangman_one_limb.svg" alt="one limb!">
-  <% when 4 %>
-    <img src="/images/hangman_two_limbs.svg" alt="two limbs!!">
-  <% when 5 %>
-    <img src="/images/hangman_three_limbs.svg" alt="three limbs!!!!">
-  <% when 6 %>
-    <img src="/images/hangman_full_body.svg" alt="full hangman body - player loses">
+  <% if all_letters_found? %>
+    <img src="/images/hangman_full_body_win.svg" alt="full hangman body - player wins!">
+  <% else %>
+    <% case @wrong_answer_count %>
+    <% when 0 %>
+      <img src="/images/hangman_empty_gallows.svg" alt="empty gallows - game has just started">
+    <% when 1 %>
+      <img src="/images/hangman_head_only.svg" alt="just the head so far">
+    <% when 2 %>
+      <img src="/images/hangman_head_and_body.svg" alt="now the head and body">
+    <% when 3 %>
+      <img src="/images/hangman_one_limb.svg" alt="one limb!">
+    <% when 4 %>
+      <img src="/images/hangman_two_limbs.svg" alt="two limbs!!">
+    <% when 5 %>
+      <img src="/images/hangman_three_limbs.svg" alt="three limbs!!!!">
+    <% when 6 %>
+      <img src="/images/hangman_full_body_lose.svg" alt="full hangman body - player loses">
+    <% end %>
   <% end %>
 </section>
 

@@ -36,6 +36,12 @@ helpers do
     session.delete(:episode_desc)
   end
 
+  def display_title
+    session.delete(:secret_word).split.map(&:capitalize).join(" ")
+  end
+
+  def view_prod?
+    !(ENV["RACK_ENV"] == "test" || ENV["RACK_ENV"] == "development")
   end
 end
 
@@ -56,8 +62,11 @@ def store_ep_details(episode)
 end
 
 def set_episode
+  if ENV["RACK_ENV"] == "test" || ENV["RACK_ENV"] == "development"
+    episode = random_episode_dev
     session[:episode_desc] = episode["description"]
   else
+    episode = random_episode_prod
     store_ep_details(episode)
   end
   session[:secret_word] = episode["title"].downcase
@@ -72,18 +81,20 @@ def reset_game
 end
 
 def game_in_progress?
-  session[:secret_word] && session[:episode_desc]
+  !session[:secret_word].nil? && !session[:episode_desc].nil?
 end
 
 # free api has no limit on queries, but does not have images
 def random_episode_dev
-  HTTParty.get("https://officeapi.dev/api/episodes/random/")["data"]
+  HTTParty.get("https://officeapi.dev/api/" \
+               "episodes/random/")["data"]
 end
 
 def random_episode_prod
   random_season_num = (1..OFFICE_SEASON_COUNT).to_a.sample # not zero-indexed
   season = HTTParty.get(
-    "https://imdb-api.com/en/API/SeasonEpisodes/#{IMDB_API_KEY}/#{SHOW_IMDB_ID}/#{random_season_num}",
+    "https://imdb-api.com/en/API/SeasonEpisodes/" \
+    "#{IMDB_API_KEY}/#{SHOW_IMDB_ID}/#{random_season_num}",
     headers: { 'Content-Type' => 'application/json' }
   ).parsed_response
 
@@ -127,7 +138,7 @@ end
 
 # Player guesses a letter
 post '/gallows' do
-  redirect '/welcome' unless session[:secret_word]
+  redirect '/welcome' unless game_in_progress?
 
   session[:player_guesses] << params[:letter_choice]
   session[:available_letters].delete(params[:letter_choice])

@@ -67,6 +67,12 @@ section.episode-info {
   margin-top: -6vh;
 }
 
+section.secret-letter-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 section.alpha-pick {
   width: 100%;
   margin-top: 1vh;

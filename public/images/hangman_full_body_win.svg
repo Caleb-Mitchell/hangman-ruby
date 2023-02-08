@@ -11,4 +11,5 @@
   <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 21, 255);" d="M 238.22 334.691 L 211.606 293.678"/>
   <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 21, 255);" d="M 211.169 242.631 L 178.01 229.542"/>
   <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 21, 255);" d="M 247.383 227.233 L 210.734 243.376" transform="matrix(-1, 0, 0, -1, 458.116989, 470.609009)"/>
+  <text style="fill: rgb(0, 128, 0); font-family: Arial, sans-serif; font-size: 30px; letter-spacing: 3px; text-anchor: middle; white-space: pre;" x="211.002" y="399.836">YOU WIN!!!</text>
 </svg>

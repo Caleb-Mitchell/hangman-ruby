@@ -17,6 +17,10 @@
   <% end %>
 </section>
 
+<% if game_over? %>
+  <hr class="info-separator">
+<% end %>
+
 <section class="episode-info">
   <% if all_letters_found? %>
     <h4 class="you-win">You Win!!</h3>

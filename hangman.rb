@@ -58,10 +58,11 @@ def store_ep_details(episode)
 end
 
 def set_episode
-  if ENV["RACK_ENV"] == "test" || ENV["RACK_ENV"] == "development"
+  case ENV.fetch("RACK_ENV", nil)
+  when "test", "development"
     episode = random_episode_dev
     session[:episode_desc] = episode["description"]
-  else
+  when "production", "prod_test"
     episode = random_episode_prod
     store_ep_details(episode)
   end
@@ -86,7 +87,27 @@ def random_episode_dev
                "episodes/random/")["data"]
 end
 
+# rubocop:disable Metrics/lineLength
+def ep_prod_test
+  { "id" => "tt0664510",
+    "seasonNumber" => "1",
+    "episodeNumber" => "5",
+    "title" => "Basketball",
+    "image" => "https://m.media-amazon.com/images/M/MV5BZDg0NmQxYmUtZTFmYi00" \
+               "NWUzLWFlOWUtNWVhZDQzN2I0ZjM2XkEyXkFqcGdeQXVyMDgyNjA5MA@@._V1" \
+               "_Ratio1.7937_AL_.jpg",
+    "year" => "2005",
+    "released" => "19 Apr. 2005",
+    "plot" => "Michael and his staff challenge the warehouse workers to a ba" \
+              "sketball game with a bet looming over both parties.",
+    "imDbRating" => "8.2",
+    "imDbRatingCount" => "7684" }
+end
+# rubocop:enable Metrics/lineLength
+
 def random_episode_prod
+  return ep_prod_test if ENV["RACK_ENV"] == "prod_test"
+
   random_season_num = (1..OFFICE_SEASON_COUNT).to_a.sample # not zero-indexed
   season = HTTParty.get(
     "https://imdb-api.com/en/API/SeasonEpisodes/" \

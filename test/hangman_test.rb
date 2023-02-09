@@ -31,7 +31,7 @@ class HangmanTest < Minitest::Test
     guesses
   end
 
-  def test_session(lose: false, win: false)
+  def session_test(lose: false, win: false)
     session = { 'rack.session' => { secret_word: TEST_WORD,
                                     episode_desc: 'test',
                                     player_guesses: [],
@@ -63,6 +63,14 @@ class HangmanTest < Minitest::Test
     assert !session[:secret_word].empty?, "There is no secret word assigned."
   end
 
+  # def test_start_button_prod
+  #   ENV["RACK_ENV"] = "production"
+  #
+  #   post '/welcome'
+  #   assert_equal 302, last_response.status
+  #   assert_includes last_response['Location'], '/gallows'
+  # end
+
   def test_gallows_invalid
     # get request to gallows without secret word or description causes redirect
     get '/gallows'
@@ -71,7 +79,7 @@ class HangmanTest < Minitest::Test
   end
 
   def test_gallows_valid
-    get '/gallows', {}, test_session
+    get '/gallows', {}, session_test
     assert_equal 200, last_response.status
     assert_includes last_response.body,
                     '<img src="/images/hangman_empty_gallows.svg"'
@@ -88,15 +96,21 @@ class HangmanTest < Minitest::Test
   end
 
   def test_player_guess_valid
-    # post to gallows with first guess redirects
-    post '/gallows', { letter_choice: 'a' }, test_session
+    post '/gallows', { letter_choice: 'a' }, session_test
     assert_equal 302, last_response.status
     assert_includes last_response['Location'], '/gallows'
     assert_equal 1, session["wrong_answer_count"]
   end
 
+  def test_player_guess_valid_and_present
+    post '/gallows', { letter_choice: 'e' }, session_test
+    assert_equal 302, last_response.status
+    assert_includes last_response['Location'], '/gallows'
+    assert_nil session[:wrong_guess]
+  end
+
   def test_show_incorrect_guess
-    post '/gallows', { letter_choice: 'a' }, test_session
+    post '/gallows', { letter_choice: 'a' }, session_test
 
     get '/gallows'
     assert_includes last_response.body,
@@ -106,7 +120,7 @@ class HangmanTest < Minitest::Test
   def test_player_two_guesses
     guesses = create_test_guesses(num_guesses: 2, correct: false)
     # test first guess with an empty test session
-    post '/gallows', { letter_choice: guesses.first }, test_session
+    post '/gallows', { letter_choice: guesses.first }, session_test
 
     # test another guess
     guesses[1..-1].each do |guess|
@@ -118,7 +132,7 @@ class HangmanTest < Minitest::Test
   def test_player_three_guesses
     guesses = create_test_guesses(num_guesses: 3, correct: false)
     # test first guess with an empty test session
-    post '/gallows', { letter_choice: guesses.first }, test_session
+    post '/gallows', { letter_choice: guesses.first }, session_test
 
     # test remaining guesses
     guesses[1..-1].each do |guess|
@@ -128,7 +142,7 @@ class HangmanTest < Minitest::Test
   end
 
   def test_game_over_lose
-    get '/gallows', {}, test_session(lose: true)
+    get '/gallows', {}, session_test(lose: true)
     assert_equal 200, last_response.status
     assert_includes last_response.body, '<section class="episode-info">'
     assert_includes last_response.body, '<fieldset class="play-again">'
@@ -138,7 +152,7 @@ class HangmanTest < Minitest::Test
   end
 
   def test_game_over_win
-    get '/gallows', {}, test_session(win: true)
+    get '/gallows', {}, session_test(win: true)
     assert_equal 200, last_response.status
     assert_includes last_response.body, '<fieldset class="play-again">'
     assert_includes last_response.body, '<section class="episode-info">'
@@ -147,24 +161,29 @@ class HangmanTest < Minitest::Test
                     'alt="full hangman body - player wins!">'
   end
 
-  def play_again_no
+  def test_play_again_no
     post '/play_again', { play_again: 'no' }
     assert_equal 302, last_response.status
     assert_includes last_response['Location'], '/welcome'
   end
 
-  def play_again_yes_redirect
+  def test_play_again_yes_redirect
     post '/play_again', { play_again: 'yes' }
     assert_equal 302, last_response.status
     assert_includes last_response['Location'], '/gallows'
   end
 
-  def play_again_yes_reset
+  def test_play_again_yes_reset
+    post '/play_again', { play_again: 'yes' }
     assert_empty session[:player_guesses]
     assert_equal ('a'..'z').to_a, session["available_letters"]
-    assert_equals 0, session[:wrong_answer_count]
+    assert_equal 0, session[:wrong_answer_count]
     assert_nil session[:wrong_guess]
   end
 
-  def test_not_found; end
+  def test_play_again_no_redirect
+    post '/play_again', { play_again: 'no' }
+    assert_equal 302, last_response.status
+    assert_includes last_response['Location'], '/welcome'
+  end
 end

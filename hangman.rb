@@ -24,10 +24,6 @@ helpers do
     end == @filtered_words.flatten.size
   end
 
-  def game_lost?
-    @wrong_answer_count == TOTAL_BODY_PARTS
-  end
-
   def game_over?
     @wrong_answer_count == TOTAL_BODY_PARTS || all_letters_found?
   end

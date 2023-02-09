@@ -63,13 +63,14 @@ class HangmanTest < Minitest::Test
     assert !session[:secret_word].empty?, "There is no secret word assigned."
   end
 
-  # def test_start_button_prod
-  #   ENV["RACK_ENV"] = "production"
-  #
-  #   post '/welcome'
-  #   assert_equal 302, last_response.status
-  #   assert_includes last_response['Location'], '/gallows'
-  # end
+  def test_start_button_prod
+    ENV['RACK_ENV'] = 'prod_test'
+    post '/welcome'
+    assert_includes session[:episode_desc], 'basketball'
+    assert_includes session[:secret_word], 'basketball'
+    assert_equal "1", session[:season_num]
+    assert_includes session[:episode_img_path], 'TFmYi00NWUzLWFlOWUtNW'
+  end
 
   def test_gallows_invalid
     # get request to gallows without secret word or description causes redirect

@@ -14,7 +14,7 @@ GEM
     nio4r (2.5.8)
     puma (6.0.2)
       nio4r (~> 2.0)
-    rack (2.2.6.3)
+    rack (2.2.6.4)
     rack-protection (3.0.5)
       rack
     ruby2_keywords (0.0.5)
@@ -44,7 +44,7 @@ DEPENDENCIES
   erubis
   httparty
   puma
-  rack (>= 2.2.6.3)
+  rack (>= 2.2.6.4)
   simplecov
   sinatra (>= 2.2.3)
   sinatra-contrib

@@ -27,11 +27,7 @@
 
 <section class="episode-info">
   <% if game_over? %>
-    <% if !view_prod? %>
-      <h2 class="ep-title">"<%= display_title %>"</h2>
-    <% else %>
-      <h2 class="ep-title">"<%= display_title %>" - Season: <%= @season_num %></h2>
-    <% end %>
+    <h2 class="ep-title">"<%= display_title %>" - Season: <%= @season_num %></h2>
   <% end %>
 
   <% if game_over? %>
@@ -40,9 +36,7 @@
 </section>
 
 <% if game_over? %>
-  <% unless !view_prod? %>
-    <img class="ep-image" src="<%= @img_path %>" alt="A picture from this episode.">
-  <% end %>
+  <img class="ep-image" src="<%= @img_path %>" alt="A picture from this episode.">
 
   <fieldset class="play-again">
     <form action='/play_again' method='post'>

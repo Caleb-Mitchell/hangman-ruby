@@ -4,7 +4,7 @@ require "sinatra/reloader" if development?
 require "tilt/erubis"
 
 SECRET = SecureRandom.hex(32)
-IMDB_API_KEY = ENV.fetch("IMDB_API_KEY", nil) if production?
+TMDB_API_KEY = ENV.fetch("TMDB_API_KEY", nil)
 
 configure do
   enable :sessions
@@ -15,7 +15,7 @@ end
 ALPHA_LETTERS = %w(q w e r t y u i o p a s d f g h j k l z x c v b n m)
 TOTAL_BODY_PARTS = 6
 OFFICE_SEASON_COUNT = 9
-SHOW_IMDB_ID = "tt0386676" # IMBD ID For: The Office
+TMDB_SERIES_ID = "2316" # TMDB ID For: The Office
 
 helpers do
   def all_letters_found?
@@ -35,10 +35,6 @@ helpers do
   def display_title
     session.delete(:secret_word).split.map(&:capitalize).join(" ")
   end
-
-  def view_prod?
-    !(ENV["RACK_ENV"] == "test" || ENV["RACK_ENV"] == "development")
-  end
 end
 
 def hide_letters(letters_arr)
@@ -52,21 +48,20 @@ def hide_letters(letters_arr)
 end
 
 def store_ep_details(episode)
-  session[:episode_desc] = episode["plot"]
-  session[:season_num] = episode["seasonNumber"]
-  session[:episode_img_path] = episode["image"]
+  session[:episode_desc] = episode["overview"]
+  session[:season_num] = episode["season_number"]
+  session[:episode_img_path] = "http://image.tmdb.org/t/p/w500#{episode['still_path']}"
 end
 
 def set_episode
   case ENV.fetch("RACK_ENV", nil)
   when "test", "development"
-    episode = random_episode_dev
-    session[:episode_desc] = episode["description"]
-  when "production", "prod_test"
+    episode = episode_five_test
+  when "production"
     episode = random_episode_prod
-    store_ep_details(episode)
   end
-  session[:secret_word] = episode["title"].downcase
+  store_ep_details(episode)
+  session[:secret_word] = episode["name"].downcase
 end
 
 def reset_game
@@ -81,38 +76,20 @@ def game_in_progress?
   !session[:secret_word].nil? && !session[:episode_desc].nil?
 end
 
-# free api has no limit on queries, but does not have images
-def random_episode_dev
-  HTTParty.get("https://officeapi.dev/api/" \
-               "episodes/random/")["data"]
+def episode_five_test
+  season = HTTParty.get(
+    "https://api.themoviedb.org/3/tv/2316/season/1/episode/5",
+    headers: { 'Content-Type' => 'application/json',
+               'Authorization' => "Bearer #{TMDB_API_KEY}" }
+  ).parsed_response
 end
-
-# rubocop:disable Metrics/lineLength
-def ep_prod_test
-  { "id" => "tt0664510",
-    "seasonNumber" => "1",
-    "episodeNumber" => "5",
-    "title" => "Basketball",
-    "image" => "https://m.media-amazon.com/images/M/MV5BZDg0NmQxYmUtZTFmYi00" \
-               "NWUzLWFlOWUtNWVhZDQzN2I0ZjM2XkEyXkFqcGdeQXVyMDgyNjA5MA@@._V1" \
-               "_Ratio1.7937_AL_.jpg",
-    "year" => "2005",
-    "released" => "19 Apr. 2005",
-    "plot" => "Michael and his staff challenge the warehouse workers to a ba" \
-              "sketball game with a bet looming over both parties.",
-    "imDbRating" => "8.2",
-    "imDbRatingCount" => "7684" }
-end
-# rubocop:enable Metrics/lineLength
 
 def random_episode_prod
-  return ep_prod_test if ENV["RACK_ENV"] == "prod_test"
-
   random_season_num = (1..OFFICE_SEASON_COUNT).to_a.sample # not zero-indexed
   season = HTTParty.get(
-    "https://imdb-api.com/en/API/SeasonEpisodes/" \
-    "#{IMDB_API_KEY}/#{SHOW_IMDB_ID}/#{random_season_num}",
-    headers: { 'Content-Type' => 'application/json' }
+    "https://api.themoviedb.org/3/tv/#{TMDB_SERIES_ID}/season/#{random_season_num}",
+    headers: { 'Content-Type' => 'application/json',
+               'Authorization' => "Bearer #{TMDB_API_KEY}" }
   ).parsed_response
 
   season["episodes"].sample # episodes are zero-indexed

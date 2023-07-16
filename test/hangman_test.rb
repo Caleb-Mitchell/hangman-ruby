@@ -1,4 +1,4 @@
-require "simplecov"
+require 'simplecov'
 SimpleCov.start
 
 ENV["RACK_ENV"] = "test"
@@ -64,12 +64,12 @@ class HangmanTest < Minitest::Test
   end
 
   def test_start_button_prod
-    ENV['RACK_ENV'] = 'prod_test'
+    ENV['RACK_ENV'] = 'test'
     post '/welcome'
     assert_includes session[:episode_desc], 'basketball'
     assert_includes session[:secret_word], 'basketball'
-    assert_equal "1", session[:season_num]
-    assert_includes session[:episode_img_path], 'TFmYi00NWUzLWFlOWUtNW'
+    assert_equal 1, session[:season_num]
+    assert_equal session[:episode_img_path], 'http://image.tmdb.org/t/p/w500/sMVjvaGeackBlES9tXLVlCl4ZIr.jpg'
   end
 
   def test_gallows_invalid

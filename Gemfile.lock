@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    office-hangman (1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -7,16 +12,20 @@ GEM
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     mini_mime (1.1.2)
+    minitest (5.18.1)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
-    nio4r (2.5.8)
-    puma (6.0.2)
+    nio4r (2.5.9)
+    puma (6.3.0)
       nio4r (~> 2.0)
-    rack (2.2.6.4)
-    rack-protection (3.0.5)
+    rack (2.2.7)
+    rack-protection (3.0.6)
       rack
+    rack-test (2.1.0)
+      rack (>= 1.3)
+    rake (13.0.6)
     ruby2_keywords (0.0.5)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -24,18 +33,18 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    sinatra (3.0.5)
+    sinatra (3.0.6)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
-      rack-protection (= 3.0.5)
+      rack-protection (= 3.0.6)
       tilt (~> 2.0)
-    sinatra-contrib (3.0.5)
+    sinatra-contrib (3.0.6)
       multi_json
       mustermann (~> 3.0)
-      rack-protection (= 3.0.5)
-      sinatra (= 3.0.5)
+      rack-protection (= 3.0.6)
+      sinatra (= 3.0.6)
       tilt (~> 2.0)
-    tilt (2.0.11)
+    tilt (2.2.0)
 
 PLATFORMS
   x86_64-linux
@@ -43,10 +52,14 @@ PLATFORMS
 DEPENDENCIES
   erubis
   httparty
+  minitest
+  office-hangman!
   puma
-  rack (>= 2.2.6.4)
+  rack
+  rack-test
+  rake
   simplecov
-  sinatra (>= 2.2.3)
+  sinatra
   sinatra-contrib
 
 RUBY VERSION

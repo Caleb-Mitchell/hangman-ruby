@@ -54,12 +54,12 @@ def store_ep_details(episode)
 end
 
 def set_episode
-  case ENV.fetch("RACK_ENV", nil)
-  when "test", "development"
-    episode = episode_five_test
-  when "production"
-    episode = random_episode_prod
-  end
+  episode = case ENV.fetch("RACK_ENV", nil)
+            when "development", "test"
+              episode_five_test
+            when "production"
+              random_episode_prod
+            end
   store_ep_details(episode)
   session[:secret_word] = episode["name"].downcase
 end
@@ -77,8 +77,8 @@ def game_in_progress?
 end
 
 def episode_five_test
-  season = HTTParty.get(
-    "https://api.themoviedb.org/3/tv/2316/season/1/episode/5",
+  HTTParty.get(
+    "https://api.themoviedb.org/3/tv/#{TMDB_SERIES_ID}/season/1/episode/5",
     headers: { 'Content-Type' => 'application/json',
                'Authorization' => "Bearer #{TMDB_API_KEY}" }
   ).parsed_response

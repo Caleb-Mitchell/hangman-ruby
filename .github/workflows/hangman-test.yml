@@ -35,3 +35,5 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run tests
       run: bundle exec rake
+      env: 
+        TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}

@@ -205,7 +205,7 @@ footer a {
 
 header a {
   text-decoration: none;
-  color: rgb(200, 195, 188);
+  color: inherit;
 }
 
 .footer-hr {
@@ -232,7 +232,7 @@ img.footer-icon {
 
   section.gallows {
     margin-top: -0.5rem;
-    margin-bottom: -22vh;
+    margin-bottom: -24vh;
     width: 90%;
     max-height: 600px;
     max-width: 600px;

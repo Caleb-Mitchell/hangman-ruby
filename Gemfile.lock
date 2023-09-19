@@ -54,7 +54,7 @@ DEPENDENCIES
   httparty
   minitest
   office-hangman!
-  puma
+  puma (= 6.3)
   rack
   rack-test
   rake

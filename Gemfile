@@ -13,7 +13,7 @@ gem "sinatra-contrib"
 gem "httparty"
 
 group :production do
-  gem "puma"
+  gem "puma", "6.3"
 end
 
 gem 'simplecov', require: false, group: :test

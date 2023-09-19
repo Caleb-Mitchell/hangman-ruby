@@ -9,16 +9,15 @@
   </head>
   <body>
     <header>
-      <h1>OFFICE - HANGMAN</h1>
+      <a href="/welcome"><h1>OFFICE - HANGMAN</h1></a>
     </header>
     <main>
       <%== yield %>
     </main>
     <footer>
-      Episode information provided by: <a href="https://www.themoviedb.org"><img class="tmdb-logo" src= "/images/tmdb_logo.svg"></a>
+      <div class="info">Episode information provided by:</div><a href="https://www.themoviedb.org"><img class="tmdb-logo" src= "/images/tmdb_logo.svg"></a>
       <hr class="footer-hr">
-      Website designed by Caleb Mitchell - calebj.mitchell@gmail.com
-      <br>
+      <div class="info">Website designed by:</div> <div class="info">Caleb Mitchell - calebj.mitchell@gmail.com</div>
       <a href="https://github.com/Caleb-Mitchell"><img class="footer-icon" src="/images/square-github.svg" alt="github icon"> Github</a> - <a href="https://www.linkedin.com/in/caleb-j-mitchell/"><img class="footer-icon" src="/images/linkedin.svg" alt="linkedin icon"> LinkedIn</a>
     </footer>
   </body>

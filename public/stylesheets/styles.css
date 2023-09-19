@@ -19,10 +19,6 @@ section.start {
   align-items: center;
 }
 
-section.gallows {
-  min-height: 500px;
-}
-
 hr.info-separator {
   visibility: hidden;
   width: 30%;
@@ -58,8 +54,10 @@ p.ep-description {
 }
 
 section.gallows {
+  pointer-events: none;
   margin: -2rem 0 2vh;
   width: 80%;
+  min-height: 500px;
   max-height: 500px;
   max-width: 500px;
 }
@@ -95,6 +93,10 @@ div.alpha-grid-3 {
   display: flex;
   grid-gap: 3vw;
   justify-content: center;
+}
+
+div.info {
+  margin-bottom: .5rem;
 }
 
 div.play-again-buttons {
@@ -201,6 +203,11 @@ footer a {
   color: rgb(200, 195, 188);
 }
 
+header a {
+  text-decoration: none;
+  color: rgb(200, 195, 188);
+}
+
 .footer-hr {
   width: 25%;
   margin-bottom: 1rem;
@@ -225,7 +232,7 @@ img.footer-icon {
 
   section.gallows {
     margin-top: -0.5rem;
-    margin-bottom: -6vh;
+    margin-bottom: -20vh;
     width: 90%;
     max-height: 600px;
     max-width: 600px;

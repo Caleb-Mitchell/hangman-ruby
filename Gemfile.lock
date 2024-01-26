@@ -6,26 +6,30 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    base64 (0.2.0)
     docile (1.4.0)
     erubis (2.7.0)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    mini_mime (1.1.2)
-    minitest (5.18.1)
+    mini_mime (1.1.5)
+    minitest (5.21.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
-    nio4r (2.5.9)
-    puma (6.3.1)
+    nio4r (2.7.0)
+    puma (6.4.2)
       nio4r (~> 2.0)
-    rack (2.2.7)
-    rack-protection (3.0.6)
-      rack
+    rack (3.0.8)
+    rack-protection (4.0.0)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0, < 4)
+    rack-session (2.0.0)
+      rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
-    rake (13.0.6)
+    rake (13.1.0)
     ruby2_keywords (0.0.5)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -33,18 +37,19 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    sinatra (3.0.6)
+    sinatra (4.0.0)
       mustermann (~> 3.0)
-      rack (~> 2.2, >= 2.2.4)
-      rack-protection (= 3.0.6)
+      rack (>= 3.0.0, < 4)
+      rack-protection (= 4.0.0)
+      rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
-    sinatra-contrib (3.0.6)
-      multi_json
+    sinatra-contrib (4.0.0)
+      multi_json (>= 0.0.2)
       mustermann (~> 3.0)
-      rack-protection (= 3.0.6)
-      sinatra (= 3.0.6)
+      rack-protection (= 4.0.0)
+      sinatra (= 4.0.0)
       tilt (~> 2.0)
-    tilt (2.2.0)
+    tilt (2.3.0)
 
 PLATFORMS
   x86_64-linux
@@ -54,7 +59,7 @@ DEPENDENCIES
   httparty
   minitest
   office-hangman!
-  puma (>= 6.3.1)
+  puma (>= 6.4.2)
   rack
   rack-test
   rake
@@ -66,4 +71,4 @@ RUBY VERSION
    ruby 3.2.0p0
 
 BUNDLED WITH
-   2.4.1
+   2.4.17
